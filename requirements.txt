@@ -1,0 +1,5 @@
+pytorch_lightning==1.3.8
+click
+imutils
+torchvision
+opencv-python
