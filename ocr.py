@@ -18,6 +18,9 @@ def ocr():
 @click.option('--path', required=True, type=click.Path())
 def predict(path):
     model = MNISTModel.load_from_checkpoint('weights.ckpt')
+    model.freeze()
+    model.eval()
+    model.cpu()
 
     predictions = []
     path = Path(path)

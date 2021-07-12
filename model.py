@@ -1,12 +1,11 @@
-import pytorch_lightning as pl
-import torch.nn as nn
-
-from torchvision import transforms
-
-import numpy as np
 import cv2 as cv
-from imutils.contours import sort_contours
 import imutils as imutils
+import numpy as np
+import pytorch_lightning as pl
+import torch
+import torch.nn as nn
+from imutils.contours import sort_contours
+from torchvision import transforms
 
 
 class MNISTModel(pl.LightningModule):
@@ -38,6 +37,7 @@ class MNISTModel(pl.LightningModule):
         x = self.linear(x)
         return x
 
+    @torch.no_grad()
     def predict_image(self, image):
         gray_img = cv.cvtColor(np.array(image.convert('L')), cv.COLOR_BGR2RGB)
         _, binary_img = cv.threshold(gray_img, 127, 255, 0)
